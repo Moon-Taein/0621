@@ -20,13 +20,19 @@ public class DBUtil {
 		try {
 			PROPS.load(DBUtil.class.getClassLoader().getResourceAsStream("mysql.properties"));
 //			Class.forName(PROPS.getProperty("jdbc.DRIVER"));
+
 			BasicDataSource ds = new BasicDataSource();
+
+			// datasource에 dirver, 사용할 db, user, password 세팅
 			ds.setDriverClassName(PROPS.getProperty("jdbc.DRIVER"));
 			ds.setUrl(PROPS.getProperty("jdbc.URL"));
 			ds.setUsername(PROPS.getProperty("jdbc.USER"));
 			ds.setPassword(PROPS.getProperty("jdbc.PASSWORD"));
 
+			// 처음 connection 갯수
 			ds.setInitialSize(0);
+
+			// 최대 connection 갯수
 			ds.setMaxTotal(8);
 
 			dataSource = ds;
